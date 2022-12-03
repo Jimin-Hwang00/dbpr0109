@@ -5,6 +5,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.product.ListProductController;
+import controller.product.SearchController;
+import controller.product.ViewProductController;
+
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -13,8 +17,13 @@ public class RequestMapping {
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	
-        
+    	// 각 uri에 대응되는 controller 객체를 생성 및 저장
+        mappings.put("/", new ForwardController("index.jsp"));
+    
+
+        mappings.put("/main", new ListProductController());
+        mappings.put("/product/view", new ViewProductController());
+        mappings.put("/product/search", new SearchController());
         logger.info("Initialized Request Mapping!");
     }
 
