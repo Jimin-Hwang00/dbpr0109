@@ -47,17 +47,22 @@ function orderCreate() {
 }
 
 function applyPoint() {
-	var totalPice = <%= request.getAttribute("totalPrice")%>;
-	var point = <%= request.getAttribute("customer.point")%>;
+	console.log("applyPoint");
+	var totalPrice = '${totalPrice + 2500}';
+	var point = '${customer.point}';
 	
-	if (orderForm.usedPointCheck.value > point) {
+	if (parseInt(orderForm.usedPoint.value) > parseInt(point)) {
 		alert("사용 가능 금액을 넘었습니다.");
 		orderForm.usedPoint.value = 0;
+		orderForm.finalPrice.value = totalPrice;
+		return false;
 	}
 	
-	if (orderForm.usedPointCheck.value > totalPrice) {
+	if (parseInt(orderForm.usedPoint.value) > parseInt(totalPrice)) {
 		("적립금을 총 주문 금액 이상 사용할 수 없습니다.");
 		orderForm.usedPoint.value = 0;
+		orderForm.finalPrice.value = totalPrice;
+		return false;
 	}
 	
 	orderForm.usedPointCheck.value = orderForm.usedPoint.value;
