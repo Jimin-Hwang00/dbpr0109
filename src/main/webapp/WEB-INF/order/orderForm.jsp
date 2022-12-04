@@ -68,6 +68,16 @@ function applyPoint() {
 	orderForm.usedPointCheck.value = orderForm.usedPoint.value;
 	orderForm.finalPrice.value = totalPrice - orderForm.usedPointCheck.value;
 }
+
+function addressSelectBtn() {
+	const addressSelectList = document.getElementsByName('addressSelect');
+	
+	if (addressSelectList[0].checked) {
+		orderForm.address.value = '${customer.address}';
+	} else {
+		orderForm.address.value = '';
+	}
+}
 </script>
 <body>
 	<%@include file="/WEB-INF/basicBar.jsp" %>
@@ -119,13 +129,13 @@ function applyPoint() {
 	    	<legend class="col-sm-2 col-form-label">배송지 선택</legend>
   			<div class="col-sm-10">
      			<div class="form-check form-check-inline">
-      				<input class="form-check-input" type="radio" name="addressSelect" id="gridRadios1" value="option1" <c:if test="${customer ne null}"> checked </c:if> <c:if test="${customer eq null}"> disabled </c:if>>
+      				<input class="form-check-input" type="radio" name="addressSelect" id="gridRadios1" value="option1" onClick="addressSelectBtn()" <c:if test="${customer ne null}"> checked </c:if> <c:if test="${customer eq null}"> disabled </c:if>>
       				<label class="form-check-label" for="gridRadios1">
          	 		  기존 배송지
        				</label>
      			</div>
 	     		<div class="form-check form-check-inline">
-	       			<input class="form-check-input" type="radio" name="addressSelect" id="gridRadios2" value="option2" <c:if test="${customer eq null}"> checked </c:if>>
+	       			<input class="form-check-input" type="radio" name="addressSelect" id="gridRadios2" value="option2" onClick="addressSelectBtn()" <c:if test="${customer eq null}"> checked </c:if>>
 	       			<label class="form-check-label" for="gridRadios2">
 	         		  새 배송지
 	       			</label>
@@ -162,6 +172,9 @@ function applyPoint() {
 	    		<div class="col">
 	     		총 주문 금액
 	    		</div>
+	    		<div class="col">
+	     		배송비
+	    		</div>
 	   			<div class="col">
 	      		사용할 적립금
 	    		</div>
@@ -176,6 +189,9 @@ function applyPoint() {
 	    		<div class="col">
 	     		${totalPrice}
 	    		</div>
+	    		<div class="col">
+	     		2500
+	    		</div>
 	   			<div class="col">
 	      			<div class="row mb-3"> 
 	        			<div class="col-sm-6">
@@ -186,7 +202,7 @@ function applyPoint() {
 	    		<div class="col">
 	      			<div class="row mb-3"> 
 	        			<div class="col-sm-6">
-	        				<input type="text" name="finalPrice" class="form-control" value="${totalPrice}" readonly>  
+	        				<input type="text" name="finalPrice" class="form-control" value="${totalPrice + 2500}" readonly>  
 	        			</div>
 	    			</div> 
 	    		</div>
