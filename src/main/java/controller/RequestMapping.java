@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import controller.product.ListProductController;
 import controller.product.SearchController;
 import controller.product.ViewProductController;
+import controller.customer.*;
 
 
 public class RequestMapping {
@@ -19,9 +20,17 @@ public class RequestMapping {
     public void initMapping() {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
         mappings.put("/", new ForwardController("index.jsp"));
-    
-
         mappings.put("/main", new ListProductController());
+        
+        mappings.put("/customer/login", new LoginController());
+        mappings.put("/customer/logout", new LogoutController());
+        mappings.put("/customer/delete", new DeleteCustomerController());
+        mappings.put("/customer/update", new UpdateCustomerController());
+        mappings.put("/customer/idCheck", new IdCheckController());
+        mappings.put("/customer/myPage", new MyPageController());
+        mappings.put("/customer/view", new ViewCustomerController());
+        mappings.put("/customer/register", new RegisterCustomerController());
+        
         mappings.put("/product/view", new ViewProductController());
         mappings.put("/product/search", new SearchController());
         logger.info("Initialized Request Mapping!");
