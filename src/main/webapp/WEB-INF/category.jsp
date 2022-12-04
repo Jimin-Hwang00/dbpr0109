@@ -54,7 +54,6 @@ li a:hover:not(.active) {
       <li><a href="woman">woman</a></li>
       <li><a href="#man"> man</a></li>
       <li><a href="#kids">kids</a></li>
-      
       <div style="float:right">
     	<table>
       	<tr>
@@ -63,7 +62,8 @@ li a:hover:not(.active) {
        		</td>
   		</tr>
   		</table>
-  	</div>
-    </ul>
+  	  </div>
+  </ul>
+</form>
 </body>
 </html>
