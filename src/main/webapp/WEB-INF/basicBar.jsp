@@ -32,10 +32,10 @@ a {
 				<th align="right">
 				<c:choose>
 					<c:when test="${sessionScope.customerId eq null}">
-						<a href="<c:url value='/customer/Login'/>">로그인</a>
+						<a href="<c:url value='/customer/login'/>">로그인</a>
 						</c:when>
 					<c:otherwise>
-						<a href="<c:url value='/customer/Logout'/>">로그아웃</a>
+						<a href="<c:url value='/customer/logout'/>">로그아웃</a>
 						</c:otherwise>
 					</c:choose>
 				</th>
