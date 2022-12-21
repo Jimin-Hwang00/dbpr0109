@@ -32,4 +32,14 @@ public class CartManager {
 		}
 		return cartItems;
 	}
+	
+	public void createCartItem(String productId, String customerId) throws SQLException {
+		cartDAO.createCartItem(productId, customerId);
+		return;
+	}
+	
+	public void deleteCartItem(String cartId) throws SQLException {
+		cartDAO.deleteCartItem(cartId);
+		return;
+	}
 }

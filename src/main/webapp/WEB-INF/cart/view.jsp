@@ -45,7 +45,7 @@
 				<td>2500원</td>
 				<td>${cartItem.price * cartItem.quantity + 2500}원</td>
 				<td>
-					<a class="btn btn-secondary btn-sm" style="font-size:xx-small;" href="<c:url value='/cart/cancel'>
+					<a class="btn btn-secondary btn-sm" style="font-size:xx-small;" href="<c:url value='/cart/deleteCartItem'>
 						<c:param name='cartId' value='${cartItem.cartId}'/>
 					</c:url>" onclick="">취소</a>
 				</td>
@@ -53,7 +53,7 @@
 		</c:forEach>
 	</tbody>
 </table>
-<a class="btn btn-dark" style="color:#bbdb18; float:right;" href="<c:url value='' />">주문하기</a>
+<a class="btn btn-dark" style="color:#bbdb18; float:right;" href="<c:url value='/order/form' />">주문하기</a>
 </div>
 </body>
 </html>
