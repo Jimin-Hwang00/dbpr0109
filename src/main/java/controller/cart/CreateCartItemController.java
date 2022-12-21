@@ -44,6 +44,7 @@ public class CreateCartItemController implements Controller {
 				if (!sameProduct) {
 					cartManager.createCartItem(productId, customerId);
 				}
+				
 		} else {
 			Product product = productManager.findProduct(productId);
 			
