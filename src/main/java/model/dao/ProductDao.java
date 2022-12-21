@@ -63,9 +63,7 @@ public class ProductDao {
 						rs.getString("productId"),
 						rs.getString("name"),
 						rs.getInt("price"),
-						rs.getString("image"),
-						rs.getString("category"),
-						rs.getInt("sell"));
+						rs.getString("image"));
 				prodList.add(prod); // List 에 Product 객체 저장
 			} 
 
