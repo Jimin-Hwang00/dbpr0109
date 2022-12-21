@@ -56,6 +56,8 @@ public class CartDAO {
 		} finally {
 			jdbcUtil.close();
 		}
+		
+		return;
 	}
 	
 	/*
@@ -78,6 +80,8 @@ public class CartDAO {
 		} finally {
 			jdbcUtil.close();
 		}
+		
+		return;
 	}
 	
 	//customerId로 cartitem 찾기
@@ -126,6 +130,28 @@ public class CartDAO {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.close();		// resource 반환
+		}
+		
+		return;
+	}
+	
+	public void updateQuantity(String cartId, int quantity) {
+		String sql = "UPDATE cart_item "
+				+ "SET quantity=quantity+? "
+				+ "WHERE cartId=?";
+		Object[] param = new Object[] {quantity, cartId};
+		
+		jdbcUtil.setSqlAndParameters(sql, param);
+		
+		try {
+			int n = jdbcUtil.executeUpdate();
+			if (n == 1) {
+				jdbcUtil.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			jdbcUtil.close();
 		}
 		
 		return;
