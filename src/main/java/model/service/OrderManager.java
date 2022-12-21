@@ -14,17 +14,17 @@ import model.Order;
 import model.Product;
 import model.ShippingDetail;
 import model.dao.OrderDAO;
-import model.dao.ProductDAO;
+import model.dao.ProductDao;
 
 public class OrderManager {
 	private static OrderManager orderMan = new OrderManager();
 	private OrderDAO orderDAO;
-	private ProductDAO productDAO;
+	private ProductDao ProductDao;
 	
 	private OrderManager() {
 		try {
 			orderDAO = new OrderDAO();
-			productDAO = new ProductDAO();
+			ProductDao = new ProductDao();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -41,7 +41,7 @@ public class OrderManager {
 		Product product;
 		int totalPrice = 0;
 		for (Item item : items) {
-			product = productDAO.findProduct(item.getProductId());
+			product = ProductDao.findProduct(item.getProductId());
 			totalPrice += product.getPrice();
 		}
 		
@@ -64,7 +64,7 @@ public class OrderManager {
 		Product product;
 		for (int i = 0; i < items.size(); i++) {		// 주문 전 재고 확인. 
 			Item item = items.get(i);
-			product = productDAO.findProduct(item.getProductId());
+			product = ProductDao.findProduct(item.getProductId());
 			if (product.getStock() < item.getQuantity()) {
 				soldOutItems.add(item);		
 				items.remove(i);						// 품절된 상품은 items에서 삭제한다. 
@@ -78,7 +78,7 @@ public class OrderManager {
 			
 			StringBuffer sb = new StringBuffer("");
 			for (Item item : soldOutItems) {
-				product = productDAO.findProduct(item.getProductId());
+				product = ProductDao.findProduct(item.getProductId());
 				sb.append(product.getName() + ", ");
 				
 			}

@@ -119,6 +119,49 @@ public class CustomerDAO {
 		return customer;
 	}
 	
+	/*전화번호로 아이디 찾기*/
+	public String findIdByPhoneNumber(String phoneNumber) throws SQLException {
+        String sql = "SELECT customerid "
+        			+ "FROM customer "
+        			+ "WHERE phonenumber = ?";              
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {phoneNumber});	// JDBCUtil에 query문과 매개 변수 설정
+
+		String customerId = null;
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
+			if (rs.next()) {
+				customerId = rs.getString("customerid");
+			}
+			System.out.println(customerId);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return customerId;
+	}
+	
+	/*아이디로 비밀번호 재발급*/
+	public String findPasswordById(String customerId) throws SQLException {
+        String sql = "UPDATE customer "
+        			+ "SET password=? "
+        			+ "WHERE customerid=?";
+        String password = Integer.toString((int)(Math.random() * 1000000));
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {password, customerId});	// JDBCUtil에 query문과 매개 변수 설정
+
+		try {
+			jdbcUtil.executeUpdate();		// query 실행
+			System.out.println(password);
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();		// resource 반환
+		}
+		return password;
+	}
+	
 	/**
 	 * 주어진 customerId를 통해 해당 customer의 Order정보들을 list로 반환
 	 */

@@ -51,6 +51,14 @@ public class CustomerManager {
 		return customer;
 	}
 	
+	public String findPasswordById(String customerId) throws SQLException {
+		return customerDAO.findPasswordById(customerId);
+	}
+	
+	public String findIdByPhoneNumber(String phoneNumber) throws SQLException {
+		return customerDAO.findIdByPhoneNumber(phoneNumber);
+	}
+	
 	public List<Item> findItemList(int orderId)
 		throws SQLException, CustomerNotFoundException {
 		List<Item> itemList = customerDAO.findItemList(orderId);

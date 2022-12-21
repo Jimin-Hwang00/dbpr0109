@@ -9,6 +9,7 @@ import controller.product.ListProductController;
 import controller.product.SearchController;
 import controller.product.ViewProductController;
 import controller.customer.*;
+import controller.order.*;
 
 
 public class RequestMapping {
@@ -30,9 +31,13 @@ public class RequestMapping {
         mappings.put("/customer/myPage", new MyPageController());
         mappings.put("/customer/view", new ViewCustomerController());
         mappings.put("/customer/register", new RegisterCustomerController());
+        mappings.put("/customer/search", new SearchIDPWController());
         
         mappings.put("/product/view", new ViewProductController());
         mappings.put("/product/search", new SearchController());
+        
+        mappings.put("/order/cancel", new OrderCancelController());
+    	
         logger.info("Initialized Request Mapping!");
     }
 
