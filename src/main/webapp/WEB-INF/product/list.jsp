@@ -8,7 +8,7 @@
 --%>
 <html>
 <head>
-<title>제품</title>
+<title>everyHealth</title>
 </head>
 
 <body>

@@ -53,6 +53,7 @@ public class DispatcherServlet extends HttpServlet {
             }                   
         } catch (Exception e) {
             logger.error("Exception : {}", e);
+            e.printStackTrace();
             throw new ServletException(e.getMessage());
         }
     }

@@ -42,7 +42,7 @@ public class OrderManager {
 		int totalPrice = 0;
 		for (Item item : items) {
 			product = productDao.findProduct(item.getProductId());
-			totalPrice += product.getPrice();
+			totalPrice += product.getPrice() * item.getQuantity();
 		}
 		
 		return totalPrice;

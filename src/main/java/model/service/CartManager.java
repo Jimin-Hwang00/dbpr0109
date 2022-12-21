@@ -42,4 +42,9 @@ public class CartManager {
 		cartDAO.deleteCartItem(cartId);
 		return;
 	}
+	
+	public void updateQuantity(String cartId, int quantity) {
+		cartDAO.updateQuantity(cartId, quantity);
+		return;
+	}
 }
