@@ -30,7 +30,20 @@ public class CreateCartItemController implements Controller {
 		 
 		 if (CustomerSessionUtils.hasLogined(session)) {
 				String customerId = CustomerSessionUtils.getLoginCustomerId(session);
-				cartManager.createCartItem(productId, customerId);
+				List<Cart> cartItems = cartManager.findCartItems(CustomerSessionUtils.getLoginCustomerId(session));
+
+				boolean sameProduct = false;
+				if (cartItems != null) {
+					for (Cart cartItem : cartItems) {
+						if (cartItem.getProductId().equals(productId)) {
+							sameProduct = true;
+							cartManager.updateQuantity(cartItem.getCartId(), 1);
+						}
+					}
+				} 
+				if (!sameProduct) {
+					cartManager.createCartItem(productId, customerId);
+				}
 		} else {
 			Product product = productManager.findProduct(productId);
 			
@@ -38,20 +51,31 @@ public class CreateCartItemController implements Controller {
 			Date date = new Date();
 			String cartId = dateFormat.format(date);
 			
-			Cart cart = new Cart();
-			cart.setCartId(cartId);
-			cart.setPrice(product.getPrice());
-			cart.setProductId(productId);
-			cart.setProductImage(product.getImage());
-			cart.setProductName(product.getName());
-			cart.setQuantity(1);
-			
 			List<Cart> cartItems = (List<Cart>)session.getAttribute("cartItems");
 			
+			boolean sameProduct = false;
 			if (cartItems == null) {
 				cartItems = new ArrayList<Cart>();
+			} else {
+				for (Cart cartItem : cartItems) {
+					if (cartItem.getProductId().equals(productId)) {
+						sameProduct = true;
+						cartItem.setQuantity(cartItem.getQuantity() + 1);
+					}
+				}
 			}
-			cartItems.add(cart);
+			
+			if (!sameProduct) {
+				Cart cart = new Cart();
+				cart.setCartId(cartId);
+				cart.setPrice(product.getPrice());
+				cart.setProductId(productId);
+				cart.setProductImage(product.getImage());
+				cart.setProductName(product.getName());
+				cart.setQuantity(1);
+				
+				cartItems.add(cart);
+			}
 			
 			session.setAttribute("cartItems", cartItems);
 		}
