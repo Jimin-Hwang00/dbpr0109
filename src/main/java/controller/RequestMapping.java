@@ -5,19 +5,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controller.customer.DeleteCustomerController;
-import controller.customer.IdCheckController;
-import controller.customer.LoginController;
-import controller.customer.LogoutController;
-import controller.customer.MyPageController;
-import controller.customer.RegisterCustomerController;
-import controller.customer.UpdateCustomerController;
-import controller.customer.ViewCustomerController;
-import controller.order.CheckOrderController;
-import controller.order.CreateOrderController;
 import controller.product.ListProductController;
 import controller.product.SearchController;
 import controller.product.ViewProductController;
+import controller.cart.*;
+import controller.customer.*;
+import controller.order.*;
 
 
 public class RequestMapping {
@@ -27,9 +20,8 @@ public class RequestMapping {
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	logger.info("Initialized Request Mapping!");
-    	
-    	mappings.put("/", new ForwardController("index.jsp"));
+    	// 각 uri에 대응되는 controller 객체를 생성 및 저장
+        mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/main", new ListProductController());
         
         mappings.put("/customer/login", new LoginController());
@@ -40,13 +32,20 @@ public class RequestMapping {
         mappings.put("/customer/myPage", new MyPageController());
         mappings.put("/customer/view", new ViewCustomerController());
         mappings.put("/customer/register", new RegisterCustomerController());
+        mappings.put("/customer/search", new SearchIDPWController());
         
         mappings.put("/product/view", new ViewProductController());
         mappings.put("/product/search", new SearchController());
-    	
-    	mappings.put("/order/form", new CreateOrderController());
+        
+        mappings.put("/order/form", new CreateOrderController());
     	mappings.put("/order/makeOrder", new CreateOrderController());
     	mappings.put("/order/orderCheck", new CheckOrderController());
+    	mappings.put("/order/cancel", new OrderCancelController());
+        
+        mappings.put("/cart/view", new ViewCartItemsController());
+        mappings.put("/cart/addCartItem", new CreateCartItemController());
+    	mappings.put("/cart/deleteCartItem", new DeleteCartItemController());
+        logger.info("Initialized Request Mapping!");
     }
 
     public Controller findController(String uri) {	
