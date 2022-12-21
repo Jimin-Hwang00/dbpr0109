@@ -107,9 +107,6 @@ function customerModify() {
 				</td>
 			</tr>
 		</table>
-		<c:if test="${updateFailed || deleteFailed}">
-			<h6><c:out value="${exception.getMessage()}"/></h6>
-		</c:if>
 	</form>
 </div>
 </body>

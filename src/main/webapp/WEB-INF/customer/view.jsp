@@ -54,9 +54,6 @@ function customerRemove() {
 		<c:param name='customerId' value='${customer.customerId}'/>
 	</c:url>">뒤로 가기</a>
 	
-	<c:if test="${updateFailed || deleteFailed}">
-		<h6><c:out value="${exception.getMessage()}"/></h6>
-    </c:if>
 </div>
 </body>
 </html>
