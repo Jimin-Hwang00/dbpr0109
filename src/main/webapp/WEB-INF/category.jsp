@@ -1,6 +1,8 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%-- <%@page import="java.util.*, model.*" %> --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +12,15 @@ function search() {
 		alert("검색어를 입력하십시오.");
 		searchForm.keyword.focus();
 		return false;
-	} 
+	}
+	searchForm.action="<c:url value='/product/search'/>";
+	searchForm.submit();
+};
+function change(category) {
+	document.getElementById("c").value=category;
 	searchForm.submit();
 }
+
 </script>
 <style>
 ul {
@@ -40,20 +48,29 @@ li a:hover:not(.active) {
     background-color: #111;
 }
 </style>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
 </head>
+
 <body>
-<form name="searchForm" method="POST" action="<c:url value='/product/search'/>">
+
+<form name="searchForm" method="POST" action="<c:url value='/product/category'/>">
  <ul>
-      <li><a href="sight">sight</a></li>
-      <li><a href="#digestion">digestion</a></li>
-      <li><a href="#immune"> immune</a></li>
-      <li><a href="#fatigue">fatigue</a></li>
-      <li><a class="joint">joint</a></li>
-      <li><a href="woman">woman</a></li>
-      <li><a href="#man"> man</a></li>
-      <li><a href="#kids">kids</a></li>
+	<li><input type="hidden" id="c" name="category" value="sight">
+      	<input type="button" class="btn text-white" value="sight" onClick=change("sight")></li>
+      <li>
+      	<input type="button" class="btn text-white" value="digestion" onClick=change("digestion")></li>
+      <li>
+      	<input type="button" class="btn text-white" value="immune" onClick=change("immune")></li>
+      <li>
+      	<input type="button" class="btn text-white" value="fatigue" onClick=change("fatigue")></li>	
+      <li>
+      	<input type="button" class="btn text-white" value="joint" onClick=change("joint")></li>
+      <li>
+      	<input type="button" class="btn text-white" value="woman" onClick=change("woman")></li>
+      <li>
+      	<input type="button" class="btn text-white" value="man" onClick=change("man")></li>
+      <li>
+      	<input type="button" class="btn text-white" value="kids" onClick=change("kids")></li>
+      
       <div style="float:right">
     	<table>
       	<tr>

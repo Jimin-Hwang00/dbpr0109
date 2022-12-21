@@ -40,7 +40,7 @@ a {
 					</c:choose>
 				</th>
 				<th align="right">|</th>
-				<th align="right"><a href=narvar.jsp " style="color: white">장바구니</a></th>
+				<th align="right"><a href="<c:url value='/cart/view'/>">장바구니</a></th>
 				<th align="right">|</th>
 				<th align="right">
 					<a href="<c:url value='/customer/myPage'>
