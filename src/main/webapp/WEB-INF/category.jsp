@@ -51,7 +51,6 @@ li a:hover:not(.active) {
 </head>
 
 <body>
-
 <form name="searchForm" method="POST" action="<c:url value='/product/category'/>">
  <ul>
 	<li><input type="hidden" id="c" name="category" value="sight">

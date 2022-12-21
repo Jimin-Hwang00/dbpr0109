@@ -11,7 +11,6 @@ import model.service.ProductManager;
 
 public class ListProductByCategoryController implements Controller{
 	
-
 	@Override
 	 public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String category = request.getParameter("category");

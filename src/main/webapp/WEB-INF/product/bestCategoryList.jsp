@@ -8,7 +8,6 @@
 	String curUserId = (String)request.getAttribute("curUserId");
 --%>
 <html>
-
 <head>
 <title>제품</title>
 <!-- Bootstrap -->

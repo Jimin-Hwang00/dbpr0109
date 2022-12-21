@@ -36,7 +36,7 @@ public class RequestMapping {
         
         mappings.put("/product/view", new ViewProductController());
         mappings.put("/product/search", new SearchController());
-        mappings.put("/product/category", new ListProductByCategoryController());   
+        mappings.put("/product/category", new ListProductByCategoryController());
         
         mappings.put("/order/cancel", new OrderCancelController());
     	
