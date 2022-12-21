@@ -9,6 +9,12 @@
 <title>마이페이지</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function cancelOrder() {
+	return confirm("정말 주문을 취소하시겠습니까?");
+}
+</script>
+
 </head>
 <body>
 <%@include file="/WEB-INF/basicBar.jsp" %>
@@ -43,7 +49,17 @@
 						${item.productName} (${item.quantity})<br>
 					</c:forEach>
 					</td>
-					<td>${order.orderStatus}</td>
+					<td>
+						${order.orderStatus}<br>
+						<c:if test="${order.orderStatus eq '입금 전'}">
+							<a class="btn btn-secondary btn-sm" style="font-size:xx-small;" href="<c:url value='/order/cancel'>
+								<c:param name='orderId' value='${order.orderId}'/>
+							</c:url>" onclick="return cancelOrder();">주문취소</a>
+						</c:if>
+					</td>
+					<c:if test="${cancelFailed}">
+						<script>alert("${exception.getMessage()}")</script>
+				    </c:if>
 				</tr>
 			</c:forEach>
 		</tbody>

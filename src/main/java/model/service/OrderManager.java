@@ -105,7 +105,7 @@ public class OrderManager {
 		String orderStatus = orderDAO.findOrderStatus(orderId);
 		
 		if (orderStatus.equals("입금 전") == false) {
-			throw new UnavailableCancelException(orderStatus + " 단계에서는 주문 취소가 불가능합니다.");
+			throw new UnavailableCancelException(orderStatus + " 단계에서는 주문 취소가 불가능합니다");
 		} 
 		
 		if (customerId != null) {			// 회원의 주문 취소인 경우 

@@ -29,6 +29,10 @@ function login() {
 <%@include file="/WEB-INF/basicBar.jsp" %>
 <%@include file="/WEB-INF/category.jsp" %>
 
+<c:if test="${loginFailed}">
+	<script>alert("${exception.getMessage()}")</script>
+</c:if>
+
 <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);" align="center">
 	<form name="loginFrm" method="POST" action="<c:url value='/customer/login'/>">
 		<h3>로그인</h3>

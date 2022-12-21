@@ -78,6 +78,10 @@ function checkId() {
 <%@include file="/WEB-INF/basicBar.jsp" %>
 <%@include file="/WEB-INF/category.jsp" %>
 
+<c:if test="${registerFailed}">
+	<script>alert("${exception.getMessage()}")</script>
+</c:if>
+		
 <div style="width:600px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);" align="center">
 	<h3>회원가입</h3>
 	<form name="registerFrm" method="POST" action="<c:url value='/customer/register'/>">
