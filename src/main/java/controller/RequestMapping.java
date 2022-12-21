@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import controller.product.ListProductController;
 import controller.product.SearchController;
 import controller.product.ViewProductController;
+import controller.cart.*;
 import controller.customer.*;
 import controller.order.*;
 
@@ -37,6 +38,8 @@ public class RequestMapping {
         mappings.put("/product/search", new SearchController());
         
         mappings.put("/order/cancel", new OrderCancelController());
+        
+        mappings.put("/cart/view", new ViewCartItemsController());
     	
         logger.info("Initialized Request Mapping!");
     }
