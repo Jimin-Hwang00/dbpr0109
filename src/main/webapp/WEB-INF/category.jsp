@@ -20,7 +20,6 @@ function change(category) {
 	document.getElementById("c").value=category;
 	searchForm.submit();
 }
-
 </script>
 <style>
 ul {
@@ -74,7 +73,7 @@ li a:hover:not(.active) {
     	<table>
       	<tr>
  	   		<td><input type="text" style="width:240" name="keyword"></td>
-       		<td><input type="button" value="검색" onClick="search()">
+       		<td><input type="button" value="검색" onClick="search()" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;">
        		</td>
   		</tr>
   		</table>
