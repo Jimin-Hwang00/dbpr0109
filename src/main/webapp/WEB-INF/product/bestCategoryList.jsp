@@ -9,11 +9,12 @@
 --%>
 <html>
 <head>
-<title>제품</title>
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+</style>
 <script>
 	$(function() {
 		$('#digestion').hide();
@@ -117,40 +118,39 @@
 </head>
 
 <body>
+<p class="fs-1" style="font-weight: bold;">&nbsp;<br>카테고리별 랭킹</p>
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" style=" background-color:white;">
+      <li class="nav-item">
+        <button type="button" id="btnSight" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;">sight</button>
+      </li>
+      <li class="nav-item">
+        <button type="button" id="btnDigestion" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;">digestion</button>
+      </li>
+      <li class="nav-item">
+        <button type="button" id="btnImmune" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;">immune</button>
+	 </li>
+      <li class="nav-item">
+        <button type="button" id="btnFatigue" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;">fatigue</button>
+      </li>
+      <li class="nav-item">
+        <button type="button" id="btnJoint" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;">joint</button>
+	</li>
+      <li class="nav-item">
+        <button type="button" id="btnWoman" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;">woman</button>
+	 </li>
+      <li class="nav-item">
+        <button type="button" id="btnMan" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;">man</button>
 
-<table style="width:100%">
-  <tr>
-	<td width="20"></td>
-	<td>
-	<table>
-		<tr>
-		  <td class="title">&nbsp;&nbsp;<b>카테고리별 랭킹</b>&nbsp;&nbsp;</td>
-		</tr>
-	  </table>
- 
-	  <br>		  
-	<table>
-		<tr>
-		<td><button type="button" id="btnSight" class="btn btn-raised btn-success" style="background-color: #bbdb18; font-color:black; ">sight</button></td>
-		<td><button type="button" id="btnDigestion" class="btn btn-raised btn-success" style="background-color: #bbdb18;">digestion</button></td>
-		<td><button type="button" id="btnImmune" class="btn btn-raised btn-success" style="background-color: #bbdb18;">immune</button></td>
-		<td><button type="button" id="btnFatigue" class="btn btn-raised btn-success" style="background-color: #bbdb18;">fatigue</button></td>
-		<td><button type="button" id="btnJoint" class="btn btn-raised btn-success" style="background-color: #bbdb18;">joint</button></td>
-		<td><button type="button" id="btnWoman" class="btn btn-raised btn-success" style="background-color: #bbdb18;">woman</button></td>
-		<td><button type="button" id="btnMan" class="btn btn-raised btn-success" style="background-color: #bbdb18;">man</button></td>
-		<td><button type="button" id="btnKids" class="btn btn-raised btn-success" style="background-color: #bbdb18;">kids</button></td>
-		</tr>
-	 </table>
-
-  	<div id ="sight" style="width:80%; height:50%;  float:left;">
+      </li>
+      <li class="nav-item">
+		<button type="button" id="btnKids" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;">kids</button>
+      </li>
+    </ul>
+  </div>
+  <div id ="sight" style="width:80%; height:50%;  float:left;">
   	  <table class="table table-sm">
-  	    <thead>
-  	    <tr>
-		  <th>순위</th>
-		  <th>상품명</th>
-		  <th>가격</th>
-		</tr>
-		</thead>
 		<c:forEach var="i" items="${sightList}" varStatus="status">
 		<tbody>
   	  	<tr>
@@ -168,15 +168,7 @@
   	</div>
   	
   	<div id ="digestion" style="width:80%; height:50%;  float:left;">
-  	  <table class="table table-hover">
-  	  <thead>
-  	    <tr>
-		  <!-- <td width="200" align="center" bgcolor="E6ECDE" height="22">커뮤니티 ID</td> -->
-		  <th>순위</th>
-		  <th>상품명</th>
-		  <th>가격</th>
-		</tr>
-		</thead>
+  	  <table class="table table-sm">
 		<c:forEach var="i" items="${digestionList}" varStatus="status"> 
   	  	<tr>
   	  		<td>${status.count}</td>
@@ -193,12 +185,6 @@
   	
   	<div id ="immune" style="width:80%; height:50%;  float:left;">
   	  <table class="table table-sm"> 
-  	    <tr>
-		  <!-- <td width="200" align="center" bgcolor="E6ECDE" height="22">커뮤니티 ID</td> -->
-		  <th>순위</th>
-		  <th>상품명</th>
-		  <th>가격</th>
-		</tr>
 		<c:forEach var="i" items="${immuneList}" varStatus="status"> 
   	  	<tr>
   	  		<td>${status.count}</td>
@@ -215,12 +201,6 @@
   	
   	<div id ="fatigue" style="width:80%; height:50%;  float:left;">
   	  <table class="table table-sm"> 
-  	    <tr>
-		  <!-- <td width="200" align="center" bgcolor="E6ECDE" height="22">커뮤니티 ID</td> -->
-		  <th>순위</th>
-		  <th>상품명</th>
-		  <th>가격</th>
-		</tr>
 		<c:forEach var="i" items="${fatigueList}" varStatus="status"> 
   	  	<tr>
   	  		<td>${status.count}</td>
@@ -237,12 +217,6 @@
   	
   	<div id ="joint" style="width:80%; height:50%;  float:left;">
   	  <table class="table table-sm"> 
-  	    <tr>
-		  <!-- <td width="200" align="center" bgcolor="E6ECDE" height="22">커뮤니티 ID</td> -->
-		  <th>순위</th>
-		  <th>상품명</th>
-		  <th>가격</th>
-		</tr>
 		<c:forEach var="i" items="${jointList}" varStatus="status"> 
   	  	<tr>
   	  		<td>${status.count}</td>
@@ -259,12 +233,6 @@
   	
   	<div id ="woman" style="width:80%; height:50%;  float:left;">
   	  <table class="table table-sm"> 
-  	    <tr>
-		  <!-- <td width="200" align="center" bgcolor="E6ECDE" height="22">커뮤니티 ID</td> -->
-		  <th>순위</th>
-		  <th>상품명</th>
-		  <th>가격</th>
-		</tr>
 		<c:forEach var="i" items="${womanList}" varStatus="status"> 
   	  	<tr>
   	  		<td>${status.count}</td>
@@ -281,12 +249,6 @@
   	
   	<div id ="man" style="width:80%; height:50%; float:left;">
   	  <table class="table table-sm"> 
-  	    <tr>
-		  <!-- <td width="200" align="center" bgcolor="E6ECDE" height="22">커뮤니티 ID</td> -->
-		  <th>순위</th>
-		  <th>상품명</th>
-		  <th>가격</th>
-		</tr>
 		<c:forEach var="i" items="${manList}" varStatus="status"> 
   	  	<tr>
   	  		<td>${status.count}</td>
@@ -303,12 +265,6 @@
   	
   	<div id ="kids" style="width:80%; height:50%; float:left;">
   	  <table class="table table-sm"> 
-  	    <tr>
-		  <!-- <td width="200" align="center" bgcolor="E6ECDE" height="22">커뮤니티 ID</td> -->
-		  <th>순위</th>
-		  <th>상품명</th>
-		  <th>가격</th>
-		</tr>
 		<c:forEach var="i" items="${kidsList}" varStatus="status"> 
   	  	<tr>
   	  		<td>${status.count}</td>
@@ -322,8 +278,7 @@
 		</c:forEach>
   	  </table>
   	</div>
-  	
+</div>
 
-</table>
 </body>
 </html>

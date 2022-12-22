@@ -36,8 +36,8 @@
 			</div>
 			<p class="lead">${product.description}</p>
 			<div class="d-flex">
-				<input type="button" value="구매하기" onClick="location.href='<c:url value="/order/form?productid=${product.productId }"/>'"> &nbsp;
-			<input type="button" value="장바구니 담기" onClick="location.href='<c:url value="/cart/addCartItem?productid=${product.productId }"/>'">
+				<input type="button" value="구매하기" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black;" onClick="location.href='<c:url value="/order/form?productid=${product.productId }"/>'"> &nbsp;
+			<input type="button" value="장바구니 담기" class="btn btn-raised btn-success" style="background-color: #bbdb18; color:black; " onClick="location.href='<c:url value="/cart/addCartItem?productid=${product.productId }"/>'">
 			</div>
 		</div>
 	</div>
