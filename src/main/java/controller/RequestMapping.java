@@ -5,10 +5,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import controller.product.ListProductByCategoryController;
 import controller.product.ListProductController;
 import controller.product.SearchController;
 import controller.product.ViewProductController;
+import controller.cart.*;
 import controller.customer.*;
 import controller.order.*;
 
@@ -38,8 +40,14 @@ public class RequestMapping {
         mappings.put("/product/search", new SearchController());
         mappings.put("/product/category", new ListProductByCategoryController());
         
-        mappings.put("/order/cancel", new OrderCancelController());
-    	
+        mappings.put("/order/form", new CreateOrderController());
+    	mappings.put("/order/makeOrder", new CreateOrderController());
+    	mappings.put("/order/orderCheck", new CheckOrderController());
+    	mappings.put("/order/cancel", new OrderCancelController());
+        
+        mappings.put("/cart/view", new ViewCartItemsController());
+        mappings.put("/cart/addCartItem", new CreateCartItemController());
+    	mappings.put("/cart/deleteCartItem", new DeleteCartItemController());
         logger.info("Initialized Request Mapping!");
     }
 
