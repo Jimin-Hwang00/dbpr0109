@@ -53,7 +53,7 @@
 		</c:forEach>
 	</tbody>
 </table>
-<a class="btn btn-dark" style="color:#bbdb18; float:right;" href="<c:url value='/order/form' />">주문하기</a>
+<a class="btn btn-dark" style="color:#bbdb18; float:right;" href="<c:url value='/order/form'/>">주문하기</a>
 </div>
 </body>
 </html>
