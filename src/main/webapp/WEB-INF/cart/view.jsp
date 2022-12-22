@@ -15,7 +15,7 @@
 <%@include file="/WEB-INF/basicBar.jsp" %>
 <%@include file="/WEB-INF/category.jsp" %>
 
-<div style="width:1000px; padding: 50px;">
+<div style="width:1000px; padding:50px;">
 <h1>Cart</h1><br>
 <table class="table" style="width:1000px; vertical-align:middle;">
 	<thead class="table-secondary">
