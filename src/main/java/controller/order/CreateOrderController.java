@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import controller.Controller;
 import controller.customer.CustomerSessionUtils;
 import model.BillingInfo;
+import model.Cart;
 import model.CashReceipt;
 import model.Customer;
 import model.Item;
@@ -22,6 +23,7 @@ import model.NonMemCustomer;
 import model.Order;
 import model.Product;
 import model.ShippingDetail;
+import model.service.CartManager;
 import model.service.CustomerManager;
 import model.service.OrderManager;
 import model.service.OutOfStockException;
@@ -37,6 +39,7 @@ public class CreateOrderController implements Controller {
 		Customer customer = null;
 		OrderManager orderManager = OrderManager.getInstance();
 		int totalPrice = 0;
+		ArrayList<Item> items = new ArrayList<Item>();
 		
 		// 로그인 여부 확인
 		CustomerManager customerManager = CustomerManager.getInstance();
@@ -53,11 +56,10 @@ public class CreateOrderController implements Controller {
     		if (CustomerSessionUtils.hasLogined(session)) {
 	    		request.setAttribute("customer", customer);
     		}
-    		
-    		ArrayList<Item> items = new ArrayList<Item>();
     		ProductManager productManager = ProductManager.getInstance();
     		String productId = null;
-    		if ((productId = request.getParameter("productid")) != null) {		// view.jsp에서 상품 하나만 결제하는 경우
+    		// view.jsp에서 상품 하나만 결제하는 경우
+    		if ((productId = request.getParameter("productid")) != null) {		
     			Product product = productManager.findProduct(productId);
     			
     			Item item = new Item(productId, product.getName(), 1, product.getImage());
@@ -70,13 +72,33 @@ public class CreateOrderController implements Controller {
     			
     			session.setAttribute("items", items);
     		} else {
-    			// TODO 장바구니에서 넘어온 item 정리해서 "items"로 넘김. 
-//        		request.setAttribute("items", );
-//        		session.setAttribute("items", );
+    			List<Cart> cartItems;
+    			CartManager cartManager = CartManager.getInstance();
+    			if (CustomerSessionUtils.hasLogined(session)) {	
+    				customerId = CustomerSessionUtils.getLoginCustomerId(session);
+    				cartItems = cartManager.findCartItems(customerId);
+    			} else {
+    				cartItems = (List<Cart>) session.getAttribute("cartItems");
+    			}
     			
-    			// TODO items 정리해서 totalPrice 계산 후 넘김. 
-//        		totalPrice = manager.calcTotalPrice(items);
-//        		request.setAttibute("totalPrice", totalPrice);
+    			for (Cart cartItem : cartItems) {
+    				Product product = productManager.findProduct(cartItem.getProductId());
+
+    				Item item = new Item();
+    				item.setImage(product.getImage());
+    				item.setProductId(cartItem.getProductId());
+    				item.setProductName(product.getName());
+    				item.setQuantity(cartItem.getQuantity());
+    				
+    				items.add(item);
+    			}
+    			
+    			totalPrice = orderManager.calcTotalPrice(items);
+    			
+    			request.setAttribute("items", items);
+    			request.setAttribute("totalPrice", totalPrice);
+    			
+    			session.setAttribute("items", items);
     		}
 		
 			return "/order/orderForm.jsp";   // orderForm으로 이동.     	
@@ -94,7 +116,7 @@ public class CreateOrderController implements Controller {
 		String bankName = request.getParameter("bankName");					// 입금 은행명
 		String shippingMessage = request.getParameter("shippingMessage");	// 배송 메세지
 		String finalPrice = request.getParameter("finalPrice");				// 최종 가격 
-		ArrayList<Item> items = (ArrayList<Item>) session.getAttribute("items");
+		items = (ArrayList<Item>) session.getAttribute("items");
 		
 		ShippingDetail sd = new ShippingDetail(address, shippingMessage);	
 		CashReceipt cr = new CashReceipt(crType, crPhone);

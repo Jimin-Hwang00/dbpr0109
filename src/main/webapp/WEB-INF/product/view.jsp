@@ -23,6 +23,7 @@
 <%@include file="/WEB-INF/category.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
+
 	<div class="row gx-4 gx-lg-5 align-items-center">
 		<div class="col-md-6">
 			<img class="card-img-top mb-5 mb-md-0"
