@@ -23,5 +23,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <%@include file="/WEB-INF/product/bestCategoryList.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 </body>
 </html>

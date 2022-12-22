@@ -9,12 +9,17 @@ import controller.Controller;
 import model.Product;
 import model.service.ProductManager;
 
-public class SearchController implements Controller{
+public class ListProductByCategoryController implements Controller{
+	
 	@Override
 	 public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String keyword = request.getParameter("keyword");
+		String category = request.getParameter("category");
+		
 		ProductManager manager = ProductManager.getInstance();
-		request.setAttribute("searchList", manager.findProductList(keyword));
-		return "/product/searchList.jsp";
+		List<Product> categoryList = manager.findProductListByCategory(category);  
+
+		request.setAttribute("categoryList", categoryList);
+
+		return "/product/categoryList.jsp";
 	}
 }
