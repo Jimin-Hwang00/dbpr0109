@@ -66,16 +66,13 @@ public class OrderManager {
 			Item item = items.get(i);
 			product = productDao.findProduct(item.getProductId());
 			if (product.getStock() < item.getQuantity()) {
-				soldOutItems.add(item);		
-				items.remove(i);						// 품절된 상품은 items에서 삭제한다. 
+				soldOutItems.add(items.get(i));
 			}
 
 		}
 		
 		// items 중 품절된 상품이 하나라도 있는 경우. 
-		if (soldOutItems.size() > 0) {					
-			createOrder(order, nmCustomer, items, cr, bi, sd, finalPrice);	
-			
+		if (soldOutItems.size() > 0) {	
 			StringBuffer sb = new StringBuffer("");
 			for (Item item : soldOutItems) {
 				product = productDao.findProduct(item.getProductId());

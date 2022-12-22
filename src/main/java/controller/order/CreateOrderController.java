@@ -35,9 +35,11 @@ public class CreateOrderController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		String customerId = null;
-		Customer customer = null;
+		
 		OrderManager orderManager = OrderManager.getInstance();
+		
+		String customerId = null;	
+		Customer customer = null;
 		int totalPrice = 0;
 		ArrayList<Item> items = new ArrayList<Item>();
 		
@@ -56,10 +58,11 @@ public class CreateOrderController implements Controller {
     		if (CustomerSessionUtils.hasLogined(session)) {
 	    		request.setAttribute("customer", customer);
     		}
+    		
     		ProductManager productManager = ProductManager.getInstance();
     		String productId = null;
-    		// view.jsp에서 상품 하나만 결제하는 경우
-    		if ((productId = request.getParameter("productid")) != null) {		
+    		
+    		if ((productId = request.getParameter("productid")) != null) {		// 상품 상세보기 페이지에서 상품 하나만 결제하는 경우.
     			Product product = productManager.findProduct(productId);
     			
     			Item item = new Item(productId, product.getName(), 1, product.getImage());
@@ -71,17 +74,17 @@ public class CreateOrderController implements Controller {
     			request.setAttribute("totalPrice", totalPrice);
     			
     			session.setAttribute("items", items);
-    		} else {
+    		} else {															// 장바구니에서 넘어온 상품들을 결제하는 경우.
     			List<Cart> cartItems;
     			CartManager cartManager = CartManager.getInstance();
-    			if (CustomerSessionUtils.hasLogined(session)) {	
+    			if (CustomerSessionUtils.hasLogined(session)) {					// 로그인되어 있는 상태라면 DB에서 장바구니 상품을 가져옴.
     				customerId = CustomerSessionUtils.getLoginCustomerId(session);
     				cartItems = cartManager.findCartItems(customerId);
-    			} else {
+    			} else {														// 로그인이 안 되어 있는 상태라면 session에 담겨있는 장바구니 상품을 가져옴.
     				cartItems = (List<Cart>) session.getAttribute("cartItems");
     			}
     			
-    			for (Cart cartItem : cartItems) {
+    			for (Cart cartItem : cartItems) {								// 장바구니 상품을 Item DTO에 담음.
     				Product product = productManager.findProduct(cartItem.getProductId());
 
     				Item item = new Item();
@@ -92,8 +95,8 @@ public class CreateOrderController implements Controller {
     				
     				items.add(item);
     			}
-    			
-    			totalPrice = orderManager.calcTotalPrice(items);
+
+    			totalPrice = orderManager.calcTotalPrice(items);				// 모든 아이템의 가격 총합을 구함.
     			
     			request.setAttribute("items", items);
     			request.setAttribute("totalPrice", totalPrice);
@@ -105,18 +108,18 @@ public class CreateOrderController implements Controller {
 	    }
 		
 //		order form에서 입력받은 값 가져오기
-		String name = request.getParameter("name");							// 주문자 이름
-		String email = request.getParameter("email");						// 주문자 이메일
-		String phone = request.getParameter("phone");						// 주문자 전화번호
-		String usedPoint = request.getParameter("usedPoint");				// 사용한 포인트 (회원인 경우에만)
-		String address = request.getParameter("address");					// 배송 주소
-		String crType = request.getParameter("cashReceiptType");			// 현금 영수증 (개인/사업자)
-		String crPhone = request.getParameter("cashRecepitPhone");			// 현금 영수증 번호
-		String accountHolder = request.getParameter("accountHolder");		// 입금 이름
-		String bankName = request.getParameter("bankName");					// 입금 은행명
-		String shippingMessage = request.getParameter("shippingMessage");	// 배송 메세지
-		String finalPrice = request.getParameter("finalPrice");				// 최종 가격 
-		items = (ArrayList<Item>) session.getAttribute("items");
+		String name = request.getParameter("name");								// 주문자 이름
+		String email = request.getParameter("email");							// 주문자 이메일
+		String phone = request.getParameter("phone");							// 주문자 전화번호
+		String usedPoint = request.getParameter("usedPoint");					// 사용한 포인트 (회원인 경우에만)
+		String address = request.getParameter("address");						// 배송 주소
+		String crType = request.getParameter("cashReceiptType");				// 현금 영수증 (개인/사업자)
+		String crPhone = request.getParameter("cashRecepitPhone");				// 현금 영수증 번호
+		String accountHolder = request.getParameter("accountHolder");			// 입금 이름
+		String bankName = request.getParameter("bankName");						// 입금 은행명
+		String shippingMessage = request.getParameter("shippingMessage");		// 배송 메세지
+		String finalPrice = request.getParameter("finalPrice");					// 최종 가격 
+		items = (ArrayList<Item>) session.getAttribute("items");				// 주문할 상품
 		
 		ShippingDetail sd = new ShippingDetail(address, shippingMessage);	
 		CashReceipt cr = new CashReceipt(crType, crPhone);
@@ -134,12 +137,12 @@ public class CreateOrderController implements Controller {
 		
 		Order newOrder;
 		try {
-			newOrder = orderManager.createOrder(order, nmCustomer, items, cr, bi, sd, Integer.parseInt(finalPrice));
 			session.removeAttribute("items");
+			newOrder = orderManager.createOrder(order, nmCustomer, items, cr, bi, sd, Integer.parseInt(finalPrice));
 			return "redirect:/order/orderCheck?orderid=" + newOrder.getOrderId();
 		} catch (OutOfStockException e) {
 			request.setAttribute("exception", e);
-			return "/order/orderForm.jsp";
+			return "/order/orderCheck.jsp";
 		} catch (SQLException e) {
 			request.setAttribute("exception", e);
 			request.setAttribute("orderFailed", "true");
