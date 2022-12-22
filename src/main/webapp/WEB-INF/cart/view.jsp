@@ -20,7 +20,7 @@
 <table class="table" style="width:1000px; vertical-align:middle;">
 	<thead class="table-secondary">
 		<tr>
-			<th width="15%">상품</th>
+			<th width="10%">상품</th>
 			<th width="40%">상품명</th>
 			<th>금액</th>
 			<th>수량</th>
@@ -34,7 +34,7 @@
 		<c:forEach var="cartItem" items="${cartItems}">
 			<tr>
 				<td>
-					<img src="<c:url value='${cartItem.productImage}'/>" width="150" height="150"/>
+					<img src="<c:url value='${cartItem.productImage}'/>" width="100" height="100"/>
 				</td>
 				<td>${cartItem.productName}</td>
 				<td>${cartItem.price * cartItem.quantity}원</td>
