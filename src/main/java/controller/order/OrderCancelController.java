@@ -37,7 +37,7 @@ public class OrderCancelController implements Controller {
 				request.setAttribute("exception", e);
 			}
 			
-			return null; 		// 마이페이지. 
+			return "redirect:/customer/myPage?customerId=" + id; 		// 마이페이지. 
 		} 				
 			
 		try {	// 비회원 주문 취소 요청 처리. 

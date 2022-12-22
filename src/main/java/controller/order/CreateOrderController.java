@@ -95,7 +95,7 @@ public class CreateOrderController implements Controller {
     				
     				items.add(item);
     			}
-    			
+
     			totalPrice = orderManager.calcTotalPrice(items);				// 모든 아이템의 가격 총합을 구함.
     			
     			request.setAttribute("items", items);

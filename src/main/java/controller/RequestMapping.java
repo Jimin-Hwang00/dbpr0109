@@ -5,6 +5,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+import controller.product.ListProductByCategoryController;
 import controller.product.ListProductController;
 import controller.product.SearchController;
 import controller.product.ViewProductController;
@@ -36,6 +38,7 @@ public class RequestMapping {
         
         mappings.put("/product/view", new ViewProductController());
         mappings.put("/product/search", new SearchController());
+        mappings.put("/product/category", new ListProductByCategoryController());
         
         mappings.put("/order/form", new CreateOrderController());
     	mappings.put("/order/makeOrder", new CreateOrderController());
